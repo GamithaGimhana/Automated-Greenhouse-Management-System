@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+
+            - id: zone-service
+              uri: lb://zone-service
+              predicates:
+                - Path=/api/zones/**
+
+            - id: sensor-service
+              uri: lb://sensor-service
+              predicates:
+                - Path=/api/sensors/**
+
+            - id: automation-service
+              uri: lb://automation-service
+              predicates:
+                - Path=/api/automation/**
+
+            - id: crop-service
+              uri: lb://crop-service
+              predicates:
+                - Path=/api/crops/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
