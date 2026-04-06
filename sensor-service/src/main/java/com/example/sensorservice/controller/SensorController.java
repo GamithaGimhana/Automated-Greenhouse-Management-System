@@ -15,4 +15,8 @@ public class SensorController {
     public SensorDataDTO getLatest() {
         return lastData;
     }
+
+    public void setLastData(SensorDataDTO data) {
+        this.lastData = data;
+    }
 }
