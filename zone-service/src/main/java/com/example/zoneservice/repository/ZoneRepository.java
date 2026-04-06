@@ -1,4 +1,7 @@
 package com.example.zoneservice.repository;
 
-public class ZoneRepository {
+import com.example.zoneservice.entity.Zone;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ZoneRepository extends JpaRepository<Zone, Long> {
 }

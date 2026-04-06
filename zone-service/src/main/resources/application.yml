@@ -4,3 +4,12 @@ server:
 spring:
   application:
     name: zone-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/agms_zone_db
+    username: root
+    password: Ijse@1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
