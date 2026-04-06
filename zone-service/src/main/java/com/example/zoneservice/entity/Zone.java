@@ -1,4 +1,4 @@
-package com.example.zoneservice;
+package com.example.zoneservice.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
