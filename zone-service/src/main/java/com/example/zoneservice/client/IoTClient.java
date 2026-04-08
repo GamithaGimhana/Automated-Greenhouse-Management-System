@@ -11,19 +11,18 @@ public class IoTClient {
     public String createDevice(String token, String zoneId) {
 
         String response = webClient.post()
-                .uri("/devices")
+                .uri("http://104.211.95.241:8080/api/devices")
                 .header("Authorization", "Bearer " + token)
                 .bodyValue("""
-                        {
-                          "name": "Sensor",
-                          "zoneId": "%s"
-                        }
-                        """.formatted(zoneId))
+                {
+                  "name": "Sensor",
+                  "zoneId": "%s"
+                }
+                """.formatted(zoneId))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
 
-        // ⚠️ For now return dummy (later parse JSON properly)
-        return "DEVICE_ID_FROM_API";
+        return "PARSE_DEVICE_ID";
     }
 }
