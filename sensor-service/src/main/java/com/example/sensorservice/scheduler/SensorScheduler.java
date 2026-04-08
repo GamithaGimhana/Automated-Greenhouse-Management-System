@@ -4,6 +4,7 @@ import com.example.sensorservice.client.AutomationClient;
 import com.example.sensorservice.client.IoTClient;
 import com.example.sensorservice.controller.SensorController;
 import com.example.sensorservice.dto.SensorDataDTO;
+import com.example.sensorservice.dto.TelemetryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,25 +15,26 @@ public class SensorScheduler {
 
     private final IoTClient ioTClient;
     private final AutomationClient automationClient;
-    private final SensorController sensorController;
+    private final SensorController controller;
+
+    private final String DEVICE_ID = "PUT_REAL_DEVICE_ID";
 
     @Scheduled(fixedRate = 10000)
     public void fetchAndSendData() {
 
-        System.out.println("Fetching sensor data...");
+        System.out.println("Fetching REAL IoT data...");
 
-        // temp values
+        TelemetryResponse response = ioTClient.getTelemetry(DEVICE_ID);
+
         SensorDataDTO data = new SensorDataDTO();
-        data.setZoneId("Zone-A");
-        data.setTemperature(28.5);
-        data.setHumidity(55.0);
+        data.setZoneId(response.getZoneId());
+        data.setTemperature(response.getValue().getTemperature());
+        data.setHumidity(response.getValue().getHumidity());
 
-        // save latest for debug endpoint
-        sensorController.setLastData(data);
+        controller.setLastData(data);
 
-        // send to automation service
         automationClient.sendToAutomation(data);
 
-        System.out.println("Data sent to automation service");
+        System.out.println("Sent real data: " + data.getTemperature());
     }
 }
