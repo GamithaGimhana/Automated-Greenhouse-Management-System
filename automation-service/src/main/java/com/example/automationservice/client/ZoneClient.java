@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.*;
 public interface ZoneClient {
 
     @GetMapping("/api/zones/{id}")
-    Object getZone(@PathVariable("id") Long id);
+    ZoneDTO getZone(@PathVariable("id") Long id);
 }
