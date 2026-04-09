@@ -1,5 +1,6 @@
 package com.example.zoneservice.service.impl;
 
+import com.example.zoneservice.client.IoTClient;
 import com.example.zoneservice.dto.ZoneRequestDTO;
 import com.example.zoneservice.entity.Zone;
 import com.example.zoneservice.repository.ZoneRepository;
@@ -14,25 +15,27 @@ import java.util.List;
 public class ZoneServiceImpl implements ZoneService {
 
     private final ZoneRepository zoneRepository;
+    private final IoTClient ioTClient;
 
     @Override
     public Zone createZone(ZoneRequestDTO dto) {
 
-        // validation
         if (dto.getMinTemp() >= dto.getMaxTemp()) {
             throw new RuntimeException("minTemp must be less than maxTemp");
         }
-
-        // call IoT API
-        String deviceId = "TEMP_DEVICE_ID"; // placeholder
 
         Zone zone = new Zone();
         zone.setName(dto.getName());
         zone.setMinTemp(dto.getMinTemp());
         zone.setMaxTemp(dto.getMaxTemp());
-        zone.setDeviceId(deviceId);
 
-        return zoneRepository.save(zone);
+        Zone savedZone = zoneRepository.save(zone);
+
+        String deviceId = ioTClient.createDevice(savedZone.getId().toString());
+
+        savedZone.setDeviceId(deviceId);
+
+        return zoneRepository.save(savedZone);
     }
 
     @Override
