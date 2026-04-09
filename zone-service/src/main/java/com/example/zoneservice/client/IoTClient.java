@@ -1,28 +1,43 @@
 package com.example.zoneservice.client;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
+@RequiredArgsConstructor
 public class IoTClient {
+
+    private final IoTAuthClient authClient;
 
     private final WebClient webClient = WebClient.create("http://104.211.95.241:8080/api");
 
-    public String createDevice(String token, String zoneId) {
+    public String createDevice(String zoneId) {
 
-        String response = webClient.post()
-                .uri("http://104.211.95.241:8080/api/devices")
-                .header("Authorization", "Bearer " + token)
-                .bodyValue("""
-                {
-                  "name": "Sensor",
-                  "zoneId": "%s"
-                }
-                """.formatted(zoneId))
+        DeviceRequest request = new DeviceRequest();
+        request.setName("Sensor-" + zoneId);
+        request.setZoneId(zoneId);
+
+        DeviceResponse response = webClient.post()
+                .uri("/devices")
+                .header("Authorization", "Bearer " + authClient.getToken())
+                .bodyValue(request)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(DeviceResponse.class)
                 .block();
 
-        return "PARSE_DEVICE_ID";
+        return response.getDeviceId();
+    }
+
+    @Data
+    static class DeviceRequest {
+        private String name;
+        private String zoneId;
+    }
+
+    @Data
+    static class DeviceResponse {
+        private String deviceId;
     }
 }
