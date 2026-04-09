@@ -16,6 +16,23 @@ AGMS is implemented as a distributed microservice system. `service-registry` pro
 - `automation-service`: `8083`
 - `crop-service`: `8084`
 
+## Project Structure
+
+```text
+Automated-Greenhouse-Management-System/
+├── service-registry/      # Eureka server
+├── config-server/         # Spring Cloud Config server
+├── api-gateway/           # Entry point + route security
+├── zone-service/          # Zone and threshold management
+├── sensor-service/        # External telemetry fetch + forward
+├── automation-service/    # Rule engine and action logging
+├── crop-service/          # Crop lifecycle and inventory
+├── AGMS.postman_collection.json
+├── docs/
+│   └── eureka-services-up.png
+└── README.md
+```
+
 ## Prerequisites
 
 - Java 17
