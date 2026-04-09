@@ -1,0 +1,220 @@
+{
+  "info": {
+    "name": "AGMS APIs",
+    "description": "Automated Greenhouse Management System API collection for assignment validation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Zone - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Tomato Zone\",\n  \"minTemp\": 20.0,\n  \"maxTemp\": 30.0\n}"
+        },
+        "url": {
+          "raw": "{{gateway_base_url}}/api/zones",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "zones"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Zone - Get by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/zones/{{zone_id}}",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "zones",
+            "{{zone_id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Sensor - Latest",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/sensors/latest",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "sensors",
+            "latest"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Automation - Logs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/automation/logs",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "automation",
+            "logs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Crop - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cropName\": \"Tomato Batch A\",\n  \"quantity\": 100,\n  \"zoneId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{gateway_base_url}}/api/crops",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "crops"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Crop - Update Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"VEGETATIVE\"\n}"
+        },
+        "url": {
+          "raw": "{{gateway_base_url}}/api/crops/{{crop_id}}/status",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "crops",
+            "{{crop_id}}",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Crop - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/crops",
+          "host": [
+            "{{gateway_base_url}}"
+          ],
+          "path": [
+            "api",
+            "crops"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "gateway_base_url",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "jwt_token",
+      "value": "replace-with-access-token"
+    },
+    {
+      "key": "zone_id",
+      "value": "1"
+    },
+    {
+      "key": "crop_id",
+      "value": "1"
+    }
+  ]
+}
