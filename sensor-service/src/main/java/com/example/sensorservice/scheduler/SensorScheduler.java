@@ -31,8 +31,12 @@ public class SensorScheduler {
 
         for (ZoneDTO zone : zones) {
 
-            try {
+            if (zone.getDeviceId() == null || zone.getDeviceId().startsWith("TEMP")) {
+                System.out.println("Skipping zone " + zone.getId() + " (invalid deviceId)");
+                continue;
+            }
 
+            try {
                 TelemetryResponse response =
                         ioTClient.getTelemetry(zone.getDeviceId());
 
