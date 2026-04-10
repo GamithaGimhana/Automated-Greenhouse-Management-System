@@ -22,6 +22,7 @@ AGMS is implemented as a distributed microservice system. `service-registry` pro
 Automated-Greenhouse-Management-System/
 ├── service-registry/      # Eureka server
 ├── config-server/         # Spring Cloud Config server
+├── config-files/          # Git-backed centralized service properties
 ├── api-gateway/           # Entry point + route security
 ├── zone-service/          # Zone and threshold management
 ├── sensor-service/        # External telemetry fetch + forward
@@ -171,3 +172,4 @@ All services registered as `UP` in Eureka:
 - Gateway now enforces Bearer JWT checks for `/api/**` routes.
 - Domain services are configured as Spring Cloud Config clients with fallback:
   `spring.config.import=optional:configserver:http://localhost:8888`
+- Shared service properties are stored in `config-files/` and served through `config-server`.
