@@ -1,12 +1,12 @@
-server:
-  port: 8082
-
 spring:
   config:
     import: optional:configserver:http://localhost:8888
 
   application:
     name: sensor-service
+
+server:
+  port: 8082
 
 eureka:
   client:
