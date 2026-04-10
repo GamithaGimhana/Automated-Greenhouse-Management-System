@@ -9,7 +9,7 @@ spring:
     name: crop-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/agms_crop_db
+    url: jdbc:mysql://localhost:3306/agms_crop_db?createDatabaseIfNotExist=true
     username: root
     password: Ijse@1234
 

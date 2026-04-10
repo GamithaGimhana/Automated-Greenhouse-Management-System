@@ -8,7 +8,7 @@ spring:
   application:
     name: zone-service
   datasource:
-    url: jdbc:mysql://localhost:3306/agms_zone_db
+    url: jdbc:mysql://localhost:3306/agms_zone_db?createDatabaseIfNotExist=true
     username: root
     password: Ijse@1234
 

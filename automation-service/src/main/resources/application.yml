@@ -9,7 +9,7 @@ spring:
     name: automation-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/agms_automation_db
+    url: jdbc:mysql://localhost:3306/agms_automation_db?createDatabaseIfNotExist=true
     username: root
     password: Ijse@1234
 
